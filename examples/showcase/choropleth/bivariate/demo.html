@@ -17,14 +17,14 @@
 var flowPerPop = {};
 var stateKeys = _.keys(window.demo.USpop);
 _.each(stateKeys, function(key){
-  var outFlowPerPop = window.demo.CAInflow[key] / window.demo.USpop[key] * 10000;
+  var outFlowPerPop = Math.sqrt(window.demo.CAInflow[key] / window.demo.USpop[key] * 10000);
   flowPerPop[key] = outFlowPerPop;
 })
 
 var maxFlowPerKey = _.max(_.keys(flowPerPop), function(state){
   return flowPerPop[state];
 });
-var maxPerFlow = flowPerPop[maxFlowPerKey];
+var maxPerFlow = Math.sqrt(flowPerPop[maxFlowPerKey]);
 
 var popColorScale = d3.scale.quantize()
   .domain([0, maxPerFlow])
